@@ -11,8 +11,10 @@ class StoryMakerApp extends StatelessWidget {
       child: MaterialApp(
         title: 'StoryMaker',
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.pink),
           useMaterial3: true,
+          highlightColor: Colors.pink.shade50,
+          splashFactory: NoSplash.splashFactory,
         ),
         home: const MainView(),
       ),

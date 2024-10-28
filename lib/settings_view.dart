@@ -80,6 +80,18 @@ class _SettingsState extends State<SettingsView> with TickerProviderStateMixin {
           SettingsViewTab(icon: Icons.music_note, text: '사운드'),
           SettingsViewTab(icon: Icons.keyboard_command_key, text: '변수'),
         ],
+        dividerColor: Colors.black12,
+        overlayColor: WidgetStateProperty.resolveWith<Color?>(
+          (Set<WidgetState> states) {
+            if (states.contains(WidgetState.pressed)) {
+              return Colors.pink.shade50;
+            } else if (states.contains(WidgetState.hovered)) {
+              return Colors.grey.shade100;
+            } else {
+              return null;
+            }
+          },
+        ),
       ),
       body: TabBarView(controller: _tabController, children: const [
         Center(

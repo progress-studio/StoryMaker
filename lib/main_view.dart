@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_platform_alert/flutter_platform_alert.dart';
 import 'package:storymaker/settings_view.dart';
-import 'package:storymaker/story_list_cell.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:story_dart/parser.dart';
 import 'package:story_dart/project.dart';
@@ -16,6 +15,7 @@ class MainView extends StatefulWidget {
 }
 
 class _MainViewState extends State<MainView> {
+  String? _currentStoryId;
   String? _currentProjectPath;
   Project? _currentProject;
 
@@ -49,6 +49,18 @@ class _MainViewState extends State<MainView> {
     }
   }
 
+  void selectSettings() {
+    setState(() {
+      _currentStoryId = null;
+    });
+  }
+
+  void selectStory(String id) {
+    setState(() {
+      _currentStoryId = id;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,16 +68,64 @@ class _MainViewState extends State<MainView> {
         child: (_currentProject != null)
             ? Row(
                 children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      ..._currentProject!.stories.map((it) =>
-                          StoryListCell(name: it.name, isSelected: false)),
-                    ],
+                  SizedBox(
+                    width: 200,
+                    child: Column(
+                      children: [
+                        ListTile(
+                          title: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const Icon(Icons.edit_document, size: 20),
+                                  const SizedBox(width: 8),
+                                  Text(
+                                    _currentProject!.name,
+                                    style: const TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w800,
+                                    ),
+                                  )
+                                ],
+                              ),
+                              const Text(
+                                '프로젝트 설정',
+                                style: TextStyle(fontSize: 14),
+                              ),
+                            ],
+                          ),
+                          minTileHeight: 50,
+                          onTap: () => selectSettings(),
+                          selected: _currentStoryId == null,
+                        ),
+                        const Divider(height: 1, color: Colors.black12),
+                        Expanded(
+                          child: ListView(
+                            children: [
+                              ..._currentProject!.stories.map(
+                                (it) => ListTile(
+                                  title: Text(
+                                    it.name,
+                                    style: const TextStyle(fontSize: 14),
+                                  ),
+                                  minTileHeight: 5,
+                                  onTap: () => selectStory(it.id),
+                                  selected: _currentStoryId == it.id,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                  const Expanded(
-                    child: SettingsView(),
-                  ),
+                  const VerticalDivider(width: 1, color: Colors.black12),
+                  Expanded(
+                      child: (_currentStoryId == null)
+                          ? const SettingsView()
+                          : const Text('')),
                 ],
               )
             : TextButton(
