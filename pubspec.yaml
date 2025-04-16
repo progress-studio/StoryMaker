@@ -25,3 +25,11 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  fonts:
+    - family: SCDream
+      fonts:
+        - asset: assets/font/Pretendard-Bold.otf
+        - asset: assets/font/Pretendard-Medium.otf
+        - asset: assets/font/Pretendard-Regular.otf
+  assets:
+    - assets/image/
