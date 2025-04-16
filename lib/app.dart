@@ -12,9 +12,25 @@ class StoryMakerApp extends StatelessWidget {
         title: 'StoryMaker',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.pink),
-          useMaterial3: true,
           highlightColor: Colors.pink.shade50,
           splashFactory: NoSplash.splashFactory,
+          tabBarTheme: TabBarTheme(
+            dividerColor: Colors.black12,
+            overlayColor: WidgetStateProperty.resolveWith<Color?>(
+              (Set<WidgetState> states) {
+                if (states.contains(WidgetState.pressed)) {
+                  return Colors.pink.shade50;
+                } else if (states.contains(WidgetState.hovered)) {
+                  return Colors.grey.shade100;
+                } else {
+                  return null;
+                }
+              },
+            ),
+          ),
+          dividerTheme: const DividerThemeData(
+            color: Colors.black12,
+          ),
         ),
         home: const MainView(),
       ),

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../main_view.dart';
+import 'project_settings_view.dart';
 
 class SettingsViewTab extends StatelessWidget {
   const SettingsViewTab({
@@ -36,11 +38,13 @@ class SettingsView extends StatefulWidget {
 }
 
 class _SettingsState extends State<SettingsView> with TickerProviderStateMixin {
+  late MainState _mainState;
   late final TabController _tabController;
 
   @override
   void initState() {
     super.initState();
+    _mainState = context.findAncestorStateOfType<MainState>()!;
     _tabController = TabController(length: 6, vsync: this);
   }
 
@@ -79,37 +83,25 @@ class _SettingsState extends State<SettingsView> with TickerProviderStateMixin {
           SettingsViewTab(icon: Icons.photo_camera_front, text: '스페셜 씬'),
           SettingsViewTab(icon: Icons.music_note, text: '사운드'),
           SettingsViewTab(icon: Icons.keyboard_command_key, text: '변수'),
-        ],
-        dividerColor: Colors.black12,
-        overlayColor: WidgetStateProperty.resolveWith<Color?>(
-          (Set<WidgetState> states) {
-            if (states.contains(WidgetState.pressed)) {
-              return Colors.pink.shade50;
-            } else if (states.contains(WidgetState.hovered)) {
-              return Colors.grey.shade100;
-            } else {
-              return null;
-            }
-          },
-        ),
+        ]
       ),
-      body: TabBarView(controller: _tabController, children: const [
+      body: TabBarView(controller: _tabController, children: [
         Center(
-          child: Text('Project'),
+          child: ProjectSettingsView(mainState: _mainState),
         ),
-        Center(
+        const Center(
           child: Text('Character'),
         ),
-        Center(
+        const Center(
           child: Text('BG'),
         ),
-        Center(
+        const Center(
           child: Text('CG'),
         ),
-        Center(
+        const Center(
           child: Text('Sound'),
         ),
-        Center(
+        const Center(
           child: Text('Variable'),
         ),
       ]),

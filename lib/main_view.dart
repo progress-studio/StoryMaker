@@ -2,22 +2,22 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_platform_alert/flutter_platform_alert.dart';
-import 'package:storymaker/settings_view.dart';
+import 'package:storymaker/settings/settings_view.dart';
 import 'package:window_manager/window_manager.dart';
-import 'package:story_dart/parser.dart';
-import 'package:story_dart/project.dart';
+import 'story_dart/parser.dart';
+import 'story_dart/project.dart';
 
 class MainView extends StatefulWidget {
   const MainView({super.key});
 
   @override
-  State<MainView> createState() => _MainViewState();
+  State<MainView> createState() => MainState();
 }
 
-class _MainViewState extends State<MainView> {
+class MainState extends State<MainView> {
   String? _currentStoryId;
   String? _currentProjectPath;
-  Project? _currentProject;
+  Project? currentProject;
 
   Future<void> pickProject() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
@@ -35,7 +35,7 @@ class _MainViewState extends State<MainView> {
         windowManager.setTitle('${project.name} - StoryMaker');
         setState(() {
           _currentProjectPath = path;
-          _currentProject = project;
+          currentProject = project;
         });
       } catch (e) {
         await FlutterPlatformAlert.playAlertSound();
@@ -65,7 +65,7 @@ class _MainViewState extends State<MainView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: (_currentProject != null)
+        child: (currentProject != null)
             ? Row(
                 children: [
                   SizedBox(
@@ -82,12 +82,12 @@ class _MainViewState extends State<MainView> {
                                   const Icon(Icons.edit_document, size: 20),
                                   const SizedBox(width: 8),
                                   Text(
-                                    _currentProject!.name,
+                                    currentProject!.name,
                                     style: const TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.w800,
                                     ),
-                                  )
+                                  ),
                                 ],
                               ),
                               const Text(
@@ -100,11 +100,11 @@ class _MainViewState extends State<MainView> {
                           onTap: () => selectSettings(),
                           selected: _currentStoryId == null,
                         ),
-                        const Divider(height: 1, color: Colors.black12),
+                        const Divider(height: 1),
                         Expanded(
                           child: ListView(
                             children: [
-                              ..._currentProject!.stories.map(
+                              ...currentProject!.stories.map(
                                 (it) => ListTile(
                                   title: Text(
                                     it.name,
@@ -121,11 +121,12 @@ class _MainViewState extends State<MainView> {
                       ],
                     ),
                   ),
-                  const VerticalDivider(width: 1, color: Colors.black12),
+                  const VerticalDivider(width: 1),
                   Expanded(
-                      child: (_currentStoryId == null)
-                          ? const SettingsView()
-                          : const Text('')),
+                    child: (_currentStoryId == null)
+                        ? const SettingsView()
+                        : const Text(''),
+                  ),
                 ],
               )
             : TextButton(
