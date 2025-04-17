@@ -4,6 +4,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter_platform_alert/flutter_platform_alert.dart';
 import 'package:storymaker/children/story/story_list_view.dart';
 import 'package:window_manager/window_manager.dart';
+import 'component/project_placeholder.dart';
 import 'story_dart/parser.dart';
 import 'story_dart/project.dart';
 
@@ -15,7 +16,7 @@ class MainView extends StatefulWidget {
 }
 
 class MainState extends State<MainView> {
-  String? _currentProjectPath;
+  String? currentProjectPath;
   Project? currentProject;
 
   Future<void> pickProject() async {
@@ -33,7 +34,7 @@ class MainState extends State<MainView> {
         Project project = Project.fromXMLNode(node);
         windowManager.setTitle('${project.name} - StoryMaker');
         setState(() {
-          _currentProjectPath = path;
+          currentProjectPath = path;
           currentProject = project;
         });
       } catch (e) {
@@ -49,8 +50,9 @@ class MainState extends State<MainView> {
   }
 
   void closeProject() {
+    windowManager.setTitle('StoryMaker');
     setState(() {
-      _currentProjectPath = null;
+      currentProjectPath = null;
       currentProject = null;
     });
   }
@@ -72,7 +74,7 @@ class MainState extends State<MainView> {
                     onPressed: () {
                       showAboutDialog(context: context);
                     },
-                    child: const Text('StoryMaker에 대하여'),
+                    child: const Text('StoryMaker 정보...'),
                   ),
                 ],
                 child: const Padding(
@@ -165,66 +167,21 @@ class MainState extends State<MainView> {
                             },
                           ),
                           const VerticalDivider(thickness: 1, width: 1),
-                          StoryListView(project: currentProject),
-                          const VerticalDivider(thickness: 1, width: 1),
+                          Stack(
+                            children: [
+                              Visibility(
+                                visible: selectedIndex == 0,
+                                maintainState: true,
+                                child: StoryListView(
+                                  project: currentProject!,
+                                  projectPath: currentProjectPath!,
+                                ),
+                              ),
+                            ],
+                          ),
                         ],
                       )
-                      : Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          spacing: 30,
-                          children: [
-                            Column(
-                              children: [
-                                const Text(
-                                  'StoryMaker',
-                                  style: TextStyle(
-                                    fontSize: 32,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    const Text(
-                                      '시작하려면 ',
-                                      style: TextStyle(fontSize: 16),
-                                    ),
-                                    TextButton(
-                                      onPressed: pickProject,
-                                      style: TextButton.styleFrom(
-                                        padding: EdgeInsets.zero,
-                                        minimumSize: const Size(0, 0),
-                                        tapTargetSize:
-                                            MaterialTapTargetSize.shrinkWrap,
-                                        shape: const RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.zero,
-                                        ),
-                                      ),
-                                      child: const Text(
-                                        '프로젝트를 선택',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ),
-                                    const Text(
-                                      '해주세요.',
-                                      style: TextStyle(fontSize: 16),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              width: 200,
-                              child: Image.asset('assets/image/mary.webp'),
-                            ),
-                          ],
-                        ),
-                      ),
+                      : ProjectPlaceholder(action: pickProject),
             ),
           ),
         ],
