@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:storymaker/core/story_convertible.dart';
 import '../../story_dart/story.dart';
 
 class StoryEditView extends StatefulWidget {
@@ -12,8 +13,13 @@ class StoryEditView extends StatefulWidget {
 
 class StoryEditState extends State<StoryEditView> {
 
+  void storyToIntents() {
+    print(fromStory(widget.story).toString());
+  }
+
   @override
   Widget build(BuildContext context) {
+    storyToIntents();
     return Row(
       children: [
         Text(widget.story.toXMLNode().toXMLString())
