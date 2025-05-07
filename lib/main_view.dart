@@ -115,59 +115,59 @@ class MainState extends State<MainView> {
           ),
           const Divider(height: 1, thickness: 1),
           Expanded(
-            child: Center(
-              child:
-                  (currentProject != null)
-                      ? Row(
-                        children: [
-                          NavigationRail(
-                            labelType: NavigationRailLabelType.all,
-                            destinations: const [
-                              NavigationRailDestination(
-                                icon: Icon(Icons.auto_stories_outlined),
-                                selectedIcon: Icon(Icons.auto_stories),
-                                label: Text('스토리'),
-                              ),
-                              NavigationRailDestination(
-                                icon: Icon(Icons.people_outlined),
-                                selectedIcon: Icon(Icons.people),
-                                label: Text('캐릭터'),
-                              ),
-                              NavigationRailDestination(
-                                icon: Icon(Icons.image_outlined),
-                                selectedIcon: Icon(Icons.image),
-                                label: Text('배경'),
-                              ),
-                              NavigationRailDestination(
-                                icon: Icon(Icons.smart_display_outlined),
-                                selectedIcon: Icon(Icons.smart_display),
-                                label: Text('컷씬'),
-                              ),
-                              NavigationRailDestination(
-                                icon: Icon(Icons.music_note_outlined),
-                                selectedIcon: Icon(Icons.music_note),
-                                label: Text('사운드'),
-                              ),
-                              NavigationRailDestination(
-                                icon: Icon(Icons.keyboard_command_key_outlined),
-                                selectedIcon: Icon(Icons.keyboard_command_key),
-                                label: Text('변수'),
-                              ),
-                              NavigationRailDestination(
-                                icon: Icon(Icons.settings_outlined),
-                                selectedIcon: Icon(Icons.settings),
-                                label: Text('설정'),
-                              ),
-                            ],
-                            selectedIndex: selectedIndex,
-                            onDestinationSelected: (index) {
-                              setState(() {
-                                selectedIndex = index;
-                              });
-                            },
-                          ),
-                          const VerticalDivider(thickness: 1, width: 1),
-                          Stack(
+            child:
+                (currentProject != null)
+                    ? Row(
+                      children: [
+                        NavigationRail(
+                          labelType: NavigationRailLabelType.all,
+                          destinations: const [
+                            NavigationRailDestination(
+                              icon: Icon(Icons.auto_stories_outlined),
+                              selectedIcon: Icon(Icons.auto_stories),
+                              label: Text('스토리'),
+                            ),
+                            NavigationRailDestination(
+                              icon: Icon(Icons.people_outlined),
+                              selectedIcon: Icon(Icons.people),
+                              label: Text('캐릭터'),
+                            ),
+                            NavigationRailDestination(
+                              icon: Icon(Icons.image_outlined),
+                              selectedIcon: Icon(Icons.image),
+                              label: Text('배경'),
+                            ),
+                            NavigationRailDestination(
+                              icon: Icon(Icons.smart_display_outlined),
+                              selectedIcon: Icon(Icons.smart_display),
+                              label: Text('컷씬'),
+                            ),
+                            NavigationRailDestination(
+                              icon: Icon(Icons.music_note_outlined),
+                              selectedIcon: Icon(Icons.music_note),
+                              label: Text('사운드'),
+                            ),
+                            NavigationRailDestination(
+                              icon: Icon(Icons.keyboard_command_key_outlined),
+                              selectedIcon: Icon(Icons.keyboard_command_key),
+                              label: Text('변수'),
+                            ),
+                            NavigationRailDestination(
+                              icon: Icon(Icons.settings_outlined),
+                              selectedIcon: Icon(Icons.settings),
+                              label: Text('설정'),
+                            ),
+                          ],
+                          selectedIndex: selectedIndex,
+                          onDestinationSelected: (index) {
+                            setState(() {
+                              selectedIndex = index;
+                            });
+                          },
+                        ),
+                        const VerticalDivider(thickness: 1, width: 1),
+                        Expanded(
+                          child: Stack(
                             children: [
                               Visibility(
                                 visible: selectedIndex == 0,
@@ -179,10 +179,10 @@ class MainState extends State<MainView> {
                               ),
                             ],
                           ),
-                        ],
-                      )
-                      : ProjectPlaceholder(action: pickProject),
-            ),
+                        ),
+                      ],
+                    )
+                    : ProjectPlaceholder(action: pickProject),
           ),
         ],
       ),

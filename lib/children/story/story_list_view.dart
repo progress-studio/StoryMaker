@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:storymaker/children/story/story_edit_view.dart';
+import 'package:storymaker/core/story_convertible.dart';
 import '../../story_dart/parser.dart';
 import '../../story_dart/project.dart';
 import '../../story_dart/story.dart';
@@ -22,7 +23,7 @@ class StoryListView extends StatefulWidget {
 
 class StoryListState extends State<StoryListView> {
   String? currentStoryId;
-  Story? currentStory;
+  List<StoryConvertible>? currentStoryConvertible;
 
   Future<void> loadStory(String id) async {
     try {
@@ -36,7 +37,7 @@ class StoryListState extends State<StoryListView> {
       Story story = Story.fromXMLNode(node);
       setState(() {
         currentStoryId = id;
-        currentStory = story;
+        currentStoryConvertible = story.toStoryConvertible();
       });
     } catch (e) {
       await FlutterPlatformAlert.playAlertSound();
@@ -59,7 +60,7 @@ class StoryListState extends State<StoryListView> {
       } else {
         currentStoryId = null;
         // TODO: SAVE TEMP
-        currentStory = null;
+        currentStoryConvertible = null;
       }
     });
   }
@@ -121,7 +122,11 @@ class StoryListState extends State<StoryListView> {
           ),
         ),
         const VerticalDivider(thickness: 1, width: 1),
-        if (currentStory != null) StoryEditView(story: currentStory!),
+        if (currentStoryConvertible != null)
+          StoryEditView(
+            storyConvertible: currentStoryConvertible!,
+            project: widget.project,
+          ),
       ],
     );
   }

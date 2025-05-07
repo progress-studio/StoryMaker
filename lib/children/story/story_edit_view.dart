@@ -1,29 +1,57 @@
 import 'package:flutter/material.dart';
-import 'package:storymaker/core/story_convertible.dart';
-import '../../story_dart/story.dart';
+import '../../component/intent_block.dart';
+import '../../core/story_convertible.dart';
+import '../../story_dart/project.dart';
 
 class StoryEditView extends StatefulWidget {
-  final Story story;
+  final List<StoryConvertible> storyConvertible;
+  final Project project;
 
-  const StoryEditView({super.key, required this.story});
+  const StoryEditView({
+    super.key,
+    required this.storyConvertible,
+    required this.project,
+  });
 
   @override
   State<StoryEditView> createState() => StoryEditState();
 }
 
 class StoryEditState extends State<StoryEditView> {
-
-  void storyToIntents() {
-    print(fromStory(widget.story).toString());
+  @override
+  void initState() {
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    storyToIntents();
-    return Row(
-      children: [
-        Text(widget.story.toXMLNode().toXMLString())
-      ],
+    return Expanded(
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          return SingleChildScrollView(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(minHeight: constraints.maxHeight),
+              child: IntrinsicHeight(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children:
+                        widget.storyConvertible
+                            .map(
+                              (it) => IntentBlock(
+                                storyConvertible: it,
+                                project: widget.project,
+                              ),
+                            )
+                            .toList(),
+                  ),
+                ),
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }
