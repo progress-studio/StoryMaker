@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:storymaker/core/background_model.dart';
 
-import '../story_dart/project.dart';
-import 'block_dropdown.dart';
-import 'block_row.dart';
+import '../../../core/background_model.dart';
+import '../../story_dart/project.dart';
+import '../common/block_dropdown.dart';
+import '../common/block_row.dart';
 import 'children_block.dart';
 
 class BackgroundBlock extends StatefulWidget {

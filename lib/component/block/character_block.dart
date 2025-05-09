@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../core/character_model.dart';
-import '../story_dart/project.dart';
+import '../../core/character_model.dart';
+import '../../story_dart/project.dart';
 
 class CharacterBlock extends StatelessWidget {
   final CharacterModel characterModel;

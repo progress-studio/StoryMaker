@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../core/base_model.dart';
-import '../story_dart/project.dart';
+import '../../core/base_model.dart';
+import '../../story_dart/project.dart';
 
 class BaseBlock extends StatelessWidget {
   final BaseModel baseModel;

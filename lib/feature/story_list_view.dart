@@ -1,10 +1,10 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:storymaker/children/story/story_edit_view.dart';
-import 'package:storymaker/core/story_convertible.dart';
-import '../../story_dart/parser.dart';
-import '../../story_dart/project.dart';
-import '../../story_dart/story.dart';
+import 'story_edit_view.dart';
+import '../core/story_convertible.dart';
+import '../story_dart/parser.dart';
+import '../story_dart/project.dart';
+import '../story_dart/story.dart';
 import 'package:flutter_platform_alert/flutter_platform_alert.dart';
 
 class StoryListView extends StatefulWidget {

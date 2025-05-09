@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../core/delay_model.dart';
-import 'block_row.dart';
-import 'block_textfield.dart';
+import '../../core/delay_model.dart';
+import '../common/block_row.dart';
+import '../common/block_textfield.dart';
 
 class DelayBlock extends StatefulWidget {
   final DelayModel delayModel;

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../core/dialog_model.dart';
-import '../story_dart/project.dart';
-import 'block_dropdown.dart';
-import 'block_row.dart';
-import 'block_textfield.dart';
+import '../../core/dialog_model.dart';
+import '../../story_dart/project.dart';
+import '../common/block_dropdown.dart';
+import '../common/block_row.dart';
+import '../common/block_textfield.dart';
 
 class DialogBlock extends StatefulWidget {
   final DialogModel dialogModel;

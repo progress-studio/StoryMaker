@@ -2,11 +2,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_platform_alert/flutter_platform_alert.dart';
-import 'package:storymaker/children/story/story_list_view.dart';
+import 'package:storymaker/feature/story_list_view.dart';
 import 'package:window_manager/window_manager.dart';
-import 'component/project_placeholder.dart';
-import 'story_dart/parser.dart';
-import 'story_dart/project.dart';
+import '../component/common/project_placeholder.dart';
+import '../story_dart/parser.dart';
+import '../story_dart/project.dart';
 
 class MainView extends StatefulWidget {
   const MainView({super.key});

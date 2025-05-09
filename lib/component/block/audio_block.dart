@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../core/audio_model.dart';
-import '../story_dart/project.dart';
-import 'block_row.dart';
+import '../../core/audio_model.dart';
+import '../../story_dart/project.dart';
+import '../common/block_row.dart';
 import 'children_block.dart';
-import 'block_dropdown.dart';
+import '../common/block_dropdown.dart';
 
 class AudioBlock extends StatefulWidget {
   final AudioModel audioModel;

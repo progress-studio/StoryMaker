@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../core/choices_model.dart';
+import '../../core/choices_model.dart';
 
 class ChoicesBlock extends StatelessWidget {
   final ChoicesModel choicesModel;

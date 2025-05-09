@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../core/story_convertible.dart';
-import '../story_dart/project.dart';
+import '../../core/story_convertible.dart';
+import '../../story_dart/project.dart';
 import 'intent_block.dart';
 
 class ChildrenBlock extends StatelessWidget {
@@ -20,7 +20,7 @@ class ChildrenBlock extends StatelessWidget {
       child: Row(
         children: [
           const Opacity(
-            opacity: 0.2,
+            opacity: 0.1,
             child: VerticalDivider(color: Colors.black, thickness: 2),
           ),
           Expanded(
