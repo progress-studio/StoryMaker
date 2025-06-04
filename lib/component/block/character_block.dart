@@ -4,15 +4,20 @@ import '../../core/character_model.dart';
 import 'package:story_dart/project.dart';
 import '../common/block_dropdown.dart';
 import '../common/block_row.dart';
+import '../../core/story_convertible.dart';
 
 class CharacterBlock extends StatefulWidget {
   final CharacterModel characterModel;
   final Project project;
+  final Function(StoryConvertible) removeItemCallback;
+  final List<StoryConvertible> currentList;
 
   const CharacterBlock({
     super.key,
     required this.characterModel,
     required this.project,
+    required this.removeItemCallback,
+    required this.currentList,
   });
 
   @override
@@ -25,6 +30,8 @@ class CharacterBlockState extends State<CharacterBlock> {
     return BlockRow(
       title: '캐릭터',
       model: widget.characterModel,
+      removeItemCallback: widget.removeItemCallback,
+      currentList: widget.currentList,
       children: [
         SizedBox(
           width: 150,

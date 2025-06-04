@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
+// import 'package:flutter/src/widgets/drag_target.dart'; // 이전 import 제거
 import 'package:storymaker/core/story_convertible.dart';
+import '../../core/drag_data.dart';
 
 class BlockRow extends StatefulWidget {
   final String title;
   final StoryConvertible model;
+  final Function(StoryConvertible) removeItemCallback;
   final List<Widget> children;
+  final List<StoryConvertible> currentList;
 
   const BlockRow({
     super.key,
     required this.title,
     required this.model,
+    required this.removeItemCallback,
+    required this.currentList,
     this.children = const [],
   });
 
@@ -29,8 +35,12 @@ class _BlockRowState extends State<BlockRow> {
           onExit: (_) => setState(() => _isHovered = false),
           child: Transform.translate(
             offset: const Offset(-4, 0),
-            child: Draggable(
-              data: widget.model,
+            child: Draggable<DraggableItemData>(
+              data: DraggableItemData(
+                item: widget.model,
+                removeFromSourceCallback: widget.removeItemCallback,
+                sourceList: widget.currentList,
+              ),
               feedback: Material(
                 color: Colors.transparent,
                 child: Row(
@@ -46,6 +56,7 @@ class _BlockRowState extends State<BlockRow> {
                   ],
                 ),
               ),
+              dragAnchorStrategy: pointerDragAnchorStrategy,
               child: Row(
                 children: [
                   Opacity(
