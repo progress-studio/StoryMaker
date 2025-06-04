@@ -1,4 +1,4 @@
-import '../story_dart/story.dart';
+import 'package:story_dart/story.dart';
 import 'audio_model.dart';
 import 'background_model.dart';
 import 'base_model.dart';

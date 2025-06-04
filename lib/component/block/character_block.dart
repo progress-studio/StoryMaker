@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../core/character_model.dart';
-import '../../story_dart/project.dart';
+import 'package:story_dart/project.dart';
 import '../common/block_dropdown.dart';
 import '../common/block_row.dart';
 

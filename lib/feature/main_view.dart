@@ -5,8 +5,8 @@ import 'package:flutter_platform_alert/flutter_platform_alert.dart';
 import 'package:storymaker/feature/story_list_view.dart';
 import 'package:window_manager/window_manager.dart';
 import '../component/common/project_placeholder.dart';
-import '../story_dart/parser.dart';
-import '../story_dart/project.dart';
+import 'package:story_dart/parser.dart';
+import 'package:story_dart/project.dart';
 
 class MainView extends StatefulWidget {
   const MainView({super.key});

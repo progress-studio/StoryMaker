@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../story_dart/project.dart';
+import 'package:story_dart/project.dart';
 import 'scene_block.dart';
 
 import '../../core/audio_model.dart';

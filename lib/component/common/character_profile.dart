@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-import '../../story_dart/project.dart';
+import 'package:story_dart/project.dart';
 
 class CharacterProfile extends StatelessWidget {
   final Project project;

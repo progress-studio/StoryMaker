@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../core/story_convertible.dart';
-import '../../story_dart/project.dart';
+import 'package:story_dart/project.dart';
 import '../common/block_divider.dart';
 import 'intent_block.dart';
 
