@@ -6,6 +6,7 @@ import 'package:story_dart/parser.dart';
 import 'package:story_dart/project.dart';
 import 'package:story_dart/story.dart';
 import 'package:flutter_platform_alert/flutter_platform_alert.dart';
+import 'package:path/path.dart' as p;
 
 class StoryListView extends StatefulWidget {
   final Project project;
@@ -28,10 +29,15 @@ class StoryListState extends State<StoryListView> {
   Future<void> loadStory(String id) async {
     try {
       String storySrc = widget.project.stories.getElement(id).src;
-      final separator = Platform.pathSeparator;
-      final lastSeparatorIndex = widget.projectPath.lastIndexOf(separator);
-      String path = widget.projectPath.substring(0, lastSeparatorIndex + 1);
-      File file = File(path + storySrc);
+      String fullPath;
+      if (p.isAbsolute(storySrc)) {
+        fullPath = storySrc;
+      } else {
+        final projectDir = p.dirname(widget.projectPath);
+        fullPath = p.join(projectDir, storySrc);
+      }
+
+      File file = File(fullPath);
       String string = await file.readAsString();
       XMLNode node = XMLNode.fromXMLString(string);
       Story story = Story.fromXMLNode(node);
@@ -43,9 +49,9 @@ class StoryListState extends State<StoryListView> {
       await FlutterPlatformAlert.playAlertSound();
       await FlutterPlatformAlert.showAlert(
         windowTitle: '오류',
-        text: '유효한 Story XML 파일이 아닙니다.',
+        text: '스토리 파일을 불러오는 중 오류가 발생했습니다: ${e.toString()}',
         alertStyle: AlertButtonStyle.ok,
-        iconStyle: IconStyle.information,
+        iconStyle: IconStyle.error,
       );
     }
   }

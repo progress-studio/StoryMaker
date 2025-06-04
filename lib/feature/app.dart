@@ -14,7 +14,7 @@ class StoryMakerApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue),
         highlightColor: Colors.blue.shade50,
         splashFactory: NoSplash.splashFactory,
-        tabBarTheme: TabBarTheme(
+        tabBarTheme: TabBarThemeData(
           dividerColor: Colors.black12,
           overlayColor: WidgetStateProperty.resolveWith<Color?>((
             Set<WidgetState> states,

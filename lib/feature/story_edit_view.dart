@@ -23,6 +23,14 @@ class StoryEditState extends State<StoryEditView> {
     super.initState();
   }
 
+  void removeItem(StoryConvertible model) {
+    if (mounted && widget.storyConvertible.contains(model)) {
+      setState(() {
+        widget.storyConvertible.remove(model);
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -33,15 +41,21 @@ class StoryEditState extends State<StoryEditView> {
               constraints: BoxConstraints(minHeight: constraints.maxHeight),
               child: IntrinsicHeight(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 4,
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children:
                         widget.storyConvertible
                             .map(
                               (it) => IntentBlock(
+                                key: ObjectKey(it),
                                 storyConvertible: it,
                                 project: widget.project,
+                                removeItemCallback: removeItem,
+                                currentList: widget.storyConvertible,
                               ),
                             )
                             .toList(),

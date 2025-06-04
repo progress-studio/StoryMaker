@@ -5,15 +5,20 @@ import 'package:story_dart/project.dart';
 import '../common/block_dropdown.dart';
 import '../common/block_row.dart';
 import 'children_block.dart';
+import '../../core/story_convertible.dart';
 
 class BackgroundBlock extends StatefulWidget {
   final BackgroundModel backgroundModel;
   final Project project;
+  final Function(StoryConvertible) removeItemCallback;
+  final List<StoryConvertible> currentList;
 
   const BackgroundBlock({
     super.key,
     required this.backgroundModel,
     required this.project,
+    required this.removeItemCallback,
+    required this.currentList,
   });
 
   @override
@@ -29,6 +34,8 @@ class _BackgroundBlockState extends State<BackgroundBlock> {
         BlockRow(
           title: '배경',
           model: widget.backgroundModel,
+          removeItemCallback: widget.removeItemCallback,
+          currentList: widget.currentList,
           children: [
             SizedBox(
               width: 200,

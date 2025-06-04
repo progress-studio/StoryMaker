@@ -5,15 +5,20 @@ import 'package:story_dart/project.dart';
 import '../common/block_dropdown.dart';
 import '../common/block_row.dart';
 import 'children_block.dart';
+import '../../core/story_convertible.dart';
 
 class SceneBlock extends StatefulWidget {
   final SceneModel sceneModel;
   final Project project;
+  final Function(StoryConvertible) removeItemCallback;
+  final List<StoryConvertible> currentList;
 
   const SceneBlock({
     super.key,
     required this.sceneModel,
     required this.project,
+    required this.removeItemCallback,
+    required this.currentList,
   });
 
   @override
@@ -29,6 +34,8 @@ class _SceneBlockState extends State<SceneBlock> {
         BlockRow(
           title: '컷씬',
           model: widget.sceneModel,
+          removeItemCallback: widget.removeItemCallback,
+          currentList: widget.currentList,
           children: [
             SizedBox(
               width: 200,

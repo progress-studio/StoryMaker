@@ -5,15 +5,20 @@ import 'package:story_dart/project.dart';
 import '../common/block_dropdown.dart';
 import '../common/block_row.dart';
 import '../common/block_textfield.dart';
+import '../../core/story_convertible.dart';
 
 class DialogBlock extends StatefulWidget {
   final DialogModel dialogModel;
   final Project project;
+  final Function(StoryConvertible) removeItemCallback;
+  final List<StoryConvertible> currentList;
 
   const DialogBlock({
     super.key,
     required this.dialogModel,
     required this.project,
+    required this.removeItemCallback,
+    required this.currentList,
   });
 
   @override
@@ -45,6 +50,8 @@ class DialogBlockState extends State<DialogBlock> {
     return BlockRow(
       title: '대사',
       model: widget.dialogModel,
+      removeItemCallback: widget.removeItemCallback,
+      currentList: widget.currentList,
       children: [
         SizedBox(
           width: 150,

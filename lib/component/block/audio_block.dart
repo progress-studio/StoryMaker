@@ -5,15 +5,20 @@ import 'package:story_dart/project.dart';
 import '../common/block_row.dart';
 import 'children_block.dart';
 import '../common/block_dropdown.dart';
+import '../../core/story_convertible.dart';
 
 class AudioBlock extends StatefulWidget {
   final AudioModel audioModel;
   final Project project;
+  final Function(StoryConvertible) removeItemCallback;
+  final List<StoryConvertible> currentList;
 
   const AudioBlock({
     super.key,
     required this.audioModel,
     required this.project,
+    required this.removeItemCallback,
+    required this.currentList,
   });
 
   @override
@@ -29,6 +34,8 @@ class _AudioBlockState extends State<AudioBlock> {
         BlockRow(
           title: '사운드',
           model: widget.audioModel,
+          removeItemCallback: widget.removeItemCallback,
+          currentList: widget.currentList,
           children: [
             SizedBox(
               width: 200,

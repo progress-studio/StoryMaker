@@ -3,11 +3,19 @@ import 'package:flutter/material.dart';
 import '../../core/monolog_model.dart';
 import '../common/block_row.dart';
 import '../common/block_textfield.dart';
+import '../../core/story_convertible.dart';
 
 class MonologBlock extends StatefulWidget {
   final MonologModel monologModel;
+  final Function(StoryConvertible) removeItemCallback;
+  final List<StoryConvertible> currentList;
 
-  const MonologBlock({super.key, required this.monologModel});
+  const MonologBlock({
+    super.key,
+    required this.monologModel,
+    required this.removeItemCallback,
+    required this.currentList,
+  });
 
   @override
   MonologBlockState createState() => MonologBlockState();
@@ -33,6 +41,8 @@ class MonologBlockState extends State<MonologBlock> {
     return BlockRow(
       title: '독백',
       model: widget.monologModel,
+      removeItemCallback: widget.removeItemCallback,
+      currentList: widget.currentList,
       children: [
         Expanded(child: BlockTextField(controller: _contentController)),
       ],
