@@ -32,6 +32,7 @@ class MonologBlockState extends State<MonologBlock> {
   Widget build(BuildContext context) {
     return BlockRow(
       title: '독백',
+      model: widget.monologModel,
       children: [
         Expanded(child: BlockTextField(controller: _contentController)),
       ],

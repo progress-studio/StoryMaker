@@ -28,6 +28,7 @@ class _SceneBlockState extends State<SceneBlock> {
       children: [
         BlockRow(
           title: '컷씬',
+          model: widget.sceneModel,
           children: [
             SizedBox(
               width: 200,

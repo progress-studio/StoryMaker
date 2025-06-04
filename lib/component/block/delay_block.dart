@@ -32,6 +32,7 @@ class DelayBlockState extends State<DelayBlock> {
   Widget build(BuildContext context) {
     return BlockRow(
       title: '지연',
+      model: widget.delayModel,
       children: [
         Expanded(child: BlockTextField(controller: _contentController)),
       ],

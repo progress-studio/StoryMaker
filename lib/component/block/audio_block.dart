@@ -28,6 +28,7 @@ class _AudioBlockState extends State<AudioBlock> {
       children: [
         BlockRow(
           title: '사운드',
+          model: widget.audioModel,
           children: [
             SizedBox(
               width: 200,

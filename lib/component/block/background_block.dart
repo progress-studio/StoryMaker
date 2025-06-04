@@ -28,6 +28,7 @@ class _BackgroundBlockState extends State<BackgroundBlock> {
       children: [
         BlockRow(
           title: '배경',
+          model: widget.backgroundModel,
           children: [
             SizedBox(
               width: 200,

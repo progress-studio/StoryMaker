@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../../core/character_model.dart';
 import '../../story_dart/project.dart';
+import '../common/block_dropdown.dart';
+import '../common/block_row.dart';
 
-class CharacterBlock extends StatelessWidget {
+class CharacterBlock extends StatefulWidget {
   final CharacterModel characterModel;
   final Project project;
 
@@ -14,7 +16,35 @@ class CharacterBlock extends StatelessWidget {
   });
 
   @override
+  CharacterBlockState createState() => CharacterBlockState();
+}
+
+class CharacterBlockState extends State<CharacterBlock> {
+  @override
   Widget build(BuildContext context) {
-    return Text(characterModel.characterId);
+    return BlockRow(
+      title: '캐릭터',
+      model: widget.characterModel,
+      children: [
+        SizedBox(
+          width: 150,
+          child: BlockDropdown<String>(
+            value: widget.characterModel.characterId,
+            onChanged: (String? value) {
+              setState(() {
+                widget.characterModel.characterId = value!;
+              });
+            },
+            items:
+                widget.project.characters
+                    .map(
+                      (it) =>
+                          DropdownMenuItem(value: it.id, child: Text(it.name)),
+                    )
+                    .toList(),
+          ),
+        ),
+      ],
+    );
   }
 }

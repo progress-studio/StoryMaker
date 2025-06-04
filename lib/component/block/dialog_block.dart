@@ -44,6 +44,7 @@ class DialogBlockState extends State<DialogBlock> {
   Widget build(BuildContext context) {
     return BlockRow(
       title: '대사',
+      model: widget.dialogModel,
       children: [
         SizedBox(
           width: 150,

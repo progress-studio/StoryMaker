@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../../core/story_convertible.dart';
 import '../../story_dart/project.dart';
+import '../common/block_divider.dart';
 import 'intent_block.dart';
 
-class ChildrenBlock extends StatelessWidget {
+class ChildrenBlock extends StatefulWidget {
   final List<StoryConvertible> storyConvertible;
   final Project project;
 
@@ -13,6 +14,17 @@ class ChildrenBlock extends StatelessWidget {
     required this.storyConvertible,
     required this.project,
   });
+
+  @override
+  ChildrenBlockState createState() => ChildrenBlockState();
+}
+
+class ChildrenBlockState extends State<ChildrenBlock> {
+  void onDrag(StoryConvertible model, int index) {
+    setState(() {
+      widget.storyConvertible.insert(index, model);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,24 +36,43 @@ class ChildrenBlock extends StatelessWidget {
             child: VerticalDivider(color: Colors.black, thickness: 2),
           ),
           Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: Stack(
+              alignment: Alignment.bottomLeft,
               children: [
-                // DragTarget(
-                //   builder: (context, candidateData, rejectedData) {
-                //     final isHovered = candidateData.isNotEmpty;
-                //     return Container(
-                //       width: double.infinity,
-                //       height: 3,
-                //       color: isHovered ? Colors.blue : Colors.green,
-                //     );
-                //   },
-                //   onAcceptWithDetails: (details) {
-                //     print('드래그된 데이터: ${details.data}');
-                //   },
-                // ),
-                ...storyConvertible.map(
-                  (it) => IntentBlock(storyConvertible: it, project: project),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 2),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ...widget.storyConvertible.indexed.map(
+                        (entry) => Stack(
+                          alignment: Alignment.topLeft,
+                          children: [
+                            IntentBlock(
+                              storyConvertible: entry.$2,
+                              project: widget.project,
+                            ),
+                            Transform.translate(
+                              offset: const Offset(0, -12),
+                              child: BlockDivider(
+                                onPressed: () {},
+                                onDrag: (it) => onDrag(it.data, entry.$1),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Transform.translate(
+                  offset: const Offset(0, 10),
+                  child: BlockDivider(
+                    onPressed: () {},
+                    onDrag:
+                        (it) =>
+                            onDrag(it.data, widget.storyConvertible.length - 1),
+                  ),
                 ),
               ],
             ),
