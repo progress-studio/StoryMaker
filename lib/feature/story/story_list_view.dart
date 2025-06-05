@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'story_edit_view.dart';
-import '../core/story_convertible.dart';
+import '../../core/story_convertible.dart';
 import 'package:story_dart/parser.dart';
 import 'package:story_dart/project.dart';
 import 'package:story_dart/story.dart';

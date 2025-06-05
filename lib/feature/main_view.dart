@@ -2,11 +2,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_platform_alert/flutter_platform_alert.dart';
-import 'package:storymaker/feature/story_list_view.dart';
+import 'package:storymaker/feature/story/story_list_view.dart';
 import 'package:window_manager/window_manager.dart';
 import '../component/common/project_placeholder.dart';
 import 'package:story_dart/parser.dart';
 import 'package:story_dart/project.dart';
+
+import 'character/character_list_view.dart';
 
 class MainView extends StatefulWidget {
   const MainView({super.key});
@@ -175,6 +177,13 @@ class MainState extends State<MainView> {
                                 child: StoryListView(
                                   project: currentProject!,
                                   projectPath: currentProjectPath!,
+                                ),
+                              ),
+                              Visibility(
+                                visible: selectedIndex == 1,
+                                maintainState: true,
+                                child: CharacterListView(
+                                  project: currentProject!
                                 ),
                               ),
                             ],

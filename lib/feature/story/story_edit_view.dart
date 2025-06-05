@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../component/block/intent_block.dart';
-import '../core/story_convertible.dart';
+import '../../component/block/intent_block.dart';
+import '../../core/story_convertible.dart';
 import 'package:story_dart/project.dart';
 
 class StoryEditView extends StatefulWidget {

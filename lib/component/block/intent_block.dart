@@ -81,7 +81,11 @@ class IntentBlock extends StatelessWidget {
           currentList: currentList,
         );
       case ExecuteModel executeModel:
-        return ExecuteBlock(executeModel: executeModel);
+        return ExecuteBlock(
+          executeModel: executeModel,
+          removeItemCallback: removeItemCallback,
+          currentList: currentList,
+        );
       case MonologModel monologModel:
         return MonologBlock(
           monologModel: monologModel,

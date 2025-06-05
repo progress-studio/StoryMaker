@@ -30,6 +30,7 @@ class _BlockRowState extends State<BlockRow> {
     return Row(
       children: [
         MouseRegion(
+          cursor: SystemMouseCursors.click,
           onEnter: (_) => setState(() => _isHovered = true),
           onExit: (_) => setState(() => _isHovered = false),
           child: Transform.translate(
